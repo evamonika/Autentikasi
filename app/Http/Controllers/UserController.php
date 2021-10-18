@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
+use App\Models\User;
 
-class StudentController extends Controller
+class userController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-        return view('students.index', ['students' => $students]);
+        $users = User::all();
+        return view('users.index', ['User' => $users]);
     }
 
     /**
@@ -25,7 +25,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view ('students.create');
+        return view('users.create');
     }
 
     /**
@@ -37,11 +37,11 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //add data
-        Student::create($request->all());
+        User::create($request->all());
 
-        //if true, redirect to index
-        return redirect()->route('students.index')
-        ->with('success', 'Add data success!');
+        // if true, redirect to index
+        return redirect()->route('users.index')
+            ->with('success', 'Add data success!');
     }
 
     /**
@@ -52,21 +52,20 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::find($id);
-        return view('students.show', ['student' => $student]);
+        $users = User::find($id);
+        return view('users.view', ['User' => $users]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $student = Student::find($id);
-        return view('students.edit', ['student'=>$student]);
+        $users = User::find($id);
+        return view('users.edit', ['User' => $users]);
     }
 
     /**
@@ -78,14 +77,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $student = Student::find($id);
-        $student->nim = $request->nim;
-        $student->name = $request->name;
-        $student->class = $request->class;
-        $student->department = $request->department;
-        $student->phone_number = $request->phone_number;
-        $student->save();
-        return redirect()->route('student.index');
+        $users = User::find($id);
+        $users->username = $request->username;
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = $request->password;
+        $users->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -94,19 +92,17 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
     public function destroy($id)
     {
-        $student = Student::find($id);
-        $student->delete();
-        return redirect()->route('students.index');
+        $users = User::find($id);
+        $users->delete();
+        return redirect()->route('users.index');
     }
 
-    public function search(Request $request)
+    public function searchUser(Request $request)
     {
-        $keyword = $request->search;
-        $student = Student::where('name', 'like', "%" . $keyword . "%")->paginate(5);
-        return view('students.index', compact('student'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $keyword = $request->searchUser;
+        $User = User::where('name', 'like', "%" . $keyword . "%")->paginate(5);
+        return view('users.index', compact('User'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
-
 }

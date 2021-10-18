@@ -14,8 +14,7 @@
           </div>
           @endif
 
-          <a href='/students/create' class="btn btn-primary">Add Dta</a><br><br>
-
+          <a href="/students/create" class="btn btn-primary">Add Data</a> <br><br>
           <table class="table table-responsive table-striped">
             <thead>
               <tr>
@@ -27,7 +26,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($students as $s)
+              @foreach($student as $s)
               <tr>
                 <td>{{ $s->nim }}</td>
                 <td>{{ $s->name }}</td>
@@ -36,7 +35,7 @@
                 <td>
                   <form action="/students/{{$s->id}}" method="post">
                     <a href="/students/{{$s->id}}/edit" class="btn btn-warning">Edit</a>
-
+                    <a href="/students/{{$s->id}}" class="btn btn-info">View</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
