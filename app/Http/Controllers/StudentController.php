@@ -70,6 +70,12 @@ class StudentController extends Controller
         return view('students.show', ['student' => $student]);
     }
 
+    public function menu_nilai($id)
+    {
+        $student = Student::find($id);
+        return view('students.nilai', ['student' => $student]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
