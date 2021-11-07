@@ -32,4 +32,6 @@ Route::get('students/{id}/nilai', [StudentController::class, 'menu_nilai']);
 
 Route::get('/searchUser', [userController::class, 'searchUser'])->name('searchUser');
 
+Route::get('/students/{id}/report', [StudentController::class,'report']);
+
 Route::get('/search', [studentController::class, 'search'])->name('search');
