@@ -11,6 +11,8 @@
             {{ session('status') }}
           </div>
           @endif
+
+          <img width="250px" src="{{asset('storage/'.$student->photo)}}">
           <form action="/students/{{$student->id}}" method="post">
             {{csrf_field()}}
             @method('PUT')

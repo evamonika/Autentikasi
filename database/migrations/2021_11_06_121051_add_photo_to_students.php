@@ -14,7 +14,7 @@ class AddPhotoToStudents extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            //
+            $table->string('photo')->after('phone_number')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddPhotoToStudents extends Migration
     public function down()
     {
         Schema::table('students', function (Blueprint $table) {
-            //
+            $table->dropColumn('photo');
         });
     }
 }
